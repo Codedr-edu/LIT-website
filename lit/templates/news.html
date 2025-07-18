@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Tin tức - CLB Robot & Công Nghệ{% endblock %}
+
+{% block content %}
+<h2>Tin tức mới nhất</h2>
+{% if news_list %}
+  <div class="list-group">
+  {% for news in news_list %}
+    <a href="{% url 'news_view' news.id %}" class="list-group-item list-group-item-action">
+      <h5>{{ news.title }}</h5>
+      <small class="text-muted">{{ news.created|date:"d/m/Y H:i" }}</small>
+    </a>
+  {% endfor %}
+  </div>
+{% else %}
+  <p>Chưa có tin tức nào.</p>
+{% endif %}
+
+<!-- Form thêm tin tức (đơn giản) -->
+<hr>
+{% if user.is_authenticated %}
+<h4>Thêm tin tức mới</h4>
+<form action="{% url 'create_news' %}" method="post" class="mb-4">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="title" class="form-label">Tiêu đề</label>
+    <input type="text" name="title" id="title" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Nội dung</label>
+    <textarea name="content" id="editor" class="form-control" required></textarea>
+    <script src="https://cdn.ckeditor.com/ckeditor5/46.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor.create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            });
+        </script>
+  </div>
+  <button type="submit" class="btn btn-primary">Tạo</button>
+</form>
+{% endif %}
+{% endblock %}

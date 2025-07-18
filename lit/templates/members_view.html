@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Thành viên: {{ members.name }}{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 600px;">
+  {% if members.image %}
+  <img src="{{ members.image.url }}" class="card-img-top" alt="{{ members.name }}">
+  {% endif %}
+  <div class="card-body">
+    <h3 class="card-title">{{ members.name }}</h3>
+    <h5 class="text-muted">{{ members.role }}</h5>
+    <hr>
+    <div><strong>Giới thiệu:</strong> {{ members.bio|safe }}</div>
+    <div><strong>Thành tích:</strong> {{ members.achievements|safe }}</div>
+    <div><strong>Liên hệ:</strong> {{ members.contact }}</div>
+    <a href="{% url 'members' %}" class="btn btn-secondary mt-3">Quay lại danh sách thành viên</a>
+  </div>
+</div>
+{% endblock %}

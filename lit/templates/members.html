@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Thành viên - CLB Robot & Công Nghệ{% endblock %}
+
+{% block content %}
+<h2>Thành viên câu lạc bộ</h2>
+{% if members %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for member in members %}
+  <div class="col">
+    <div class="card h-100">
+      {% if member.image %}
+      <img src="{{ member.image.url }}" class="card-img-top" alt="{{ member.name }}">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ member.name }}</h5>
+        <p class="card-subtitle text-muted">{{ member.role }}</p>
+        <hr>
+        <div><strong>Giới thiệu:</strong> {{ member.bio|safe }}</div>
+        <div><strong>Thành tích:</strong> {{ member.achievements|safe }}</div>
+        <div><strong>Liên hệ:</strong> {{ member.contact }}</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p>Chưa có thành viên nào.</p>
+{% endif %}
+
+<hr>
+{% if user.is_authenticated %}
+<h4>Thêm thành viên mới</h4>
+<form action="{% url 'create_members' %}" method="post" enctype="multipart/form-data" class="mb-4">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="name" class="form-label">Tên thành viên</label>
+    <input type="text" id="name" name="name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="role" class="form-label">Chức danh</label>
+    <input type="text" id="role" name="role" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="bio" class="form-label">Giới thiệu</label>
+    <textarea id="bio" name="bio" class="form-control" rows="2"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="achievements" class="form-label">Thành tích</label>
+    <textarea id="achievements" name="achievements" class="form-control" rows="2"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="contact" class="form-label">Liên hệ</label>
+    <input type="text" id="contact" name="contact" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="image" class="form-label">Ảnh đại diện</label>
+    <input type="file" id="image" name="image" accept="image/*" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary">Thêm thành viên</button>
+</form>
+{% endif %}
+{% endblock %}

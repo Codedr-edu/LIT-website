@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Tin tức: {{ news_list.title }}{% endblock %}
+
+{% block content %}
+<article>
+  <h2>{{ news_list.title }}</h2>
+  <p><small class="text-muted">{{ news_list.created|date:"d/m/Y H:i" }}</small></p>
+  <div>
+    {{ news_list.content|safe }}
+  </div>
+  <a href="{% url 'news' %}" class="btn btn-secondary mt-3">Quay lại danh sách tin tức</a>
+</article>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Event: {{ events.title }}{% endblock %}
+
+{% block content %}
+<article>
+  <h2>{{ events.title }}</h2>
+  <p><small class="text-muted">{{ events.date|date:"d/m/Y H:i" }}</small></p>
+  <div>
+    {{ events.description|safe }}
+  </div>
+  <a href="{% url 'event' %}" class="btn btn-secondary mt-3">Quay lại danh sách Event</a>
+</article>
+{% endblock %}
