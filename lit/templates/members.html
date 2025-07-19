@@ -2,23 +2,75 @@
 
 {% block title %}Thành viên - CLB Robot & Công Nghệ{% endblock %}
 
+{% block hero %}
+<!-- HERO SECTION -->
+<style>
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: 
+      linear-gradient(90deg, rgba(15,32,39,0.7) 0%, rgba(44,83,100,0.3) 100%),
+      url('https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D') center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 36px 0 24px 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,.09);
+  }
+  .hero-content {
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .hero-title {
+    font-size: 2.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .hero-desc {
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+  @media (max-width: 768px) {
+    .hero-section { height: 180px; }
+    .hero-title { font-size: 1.3rem; }
+    .hero-desc { font-size: 1rem; }
+  }
+</style>
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Thành viên của LIT</h1>
+  </div>
+</div>
+
+{% endblock %}
+
 {% block content %}
-<h2>Thành viên câu lạc bộ</h2>
 {% if members %}
 <div class="row row-cols-1 row-cols-md-3 g-4">
   {% for member in members %}
   <div class="col">
     <div class="card h-100">
       {% if member.image %}
-      <img src="{{ member.image.url }}" class="card-img-top" alt="{{ member.name }}">
+      <div class="text-center">
+        <img src="{{ member.image.url }}" class="card-img-top rounded-circle text-center" style="width: 200px;height: 200px;" alt="{{ member.name }}">
+      </div>
+
       {% endif %}
-      <div class="card-body">
-        <h5 class="card-title">{{ member.name }}</h5>
+      <div class="card-body text-center">
+        <h1 class="card-title">{{ member.name }}</h1>
         <p class="card-subtitle text-muted">{{ member.role }}</p>
         <hr>
-        <div><strong>Giới thiệu:</strong> {{ member.bio|safe }}</div>
+       <a class="btn btn-primary" href="{% url 'members_view' member.id %}">Xem chi tiết</a>
+        <!---<div><strong>Giới thiệu:</strong> {{ member.bio|safe }}</div>
         <div><strong>Thành tích:</strong> {{ member.achievements|safe }}</div>
-        <div><strong>Liên hệ:</strong> {{ member.contact }}</div>
+        <div><strong>Liên hệ:</strong> {{ member.contact }}</div>--->
       </div>
     </div>
   </div>
@@ -43,11 +95,37 @@
   </div>
   <div class="mb-3">
     <label for="bio" class="form-label">Giới thiệu</label>
-    <textarea id="bio" name="bio" class="form-control" rows="2"></textarea>
+    <textarea name="bio" id="editor" class="form-control" required></textarea>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@4.1.4/js/languages/vi.js"></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+    <script> 
+      var editor = new FroalaEditor('#editor',{
+    language: 'vi',  // Giao diện tiếng Việt
+    imageUploadURL: '/froala_image_upload/',
+    imageUploadParams: {
+      csrfmiddlewaretoken: '{{ csrf_token }}'
+    },
+    heightMin: 200,
+    heightMax: 500
+  });
+    </script>
   </div>
   <div class="mb-3">
     <label for="achievements" class="form-label">Thành tích</label>
-    <textarea id="achievements" name="achievements" class="form-control" rows="2"></textarea>
+    <textarea name="achievements" id="editor1" class="form-control" required></textarea>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@4.1.4/js/languages/vi.js"></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+    <script> 
+      var editor = new FroalaEditor('#editor1',{
+    language: 'vi',  // Giao diện tiếng Việt
+    imageUploadURL: '/froala_image_upload/',
+    imageUploadParams: {
+      csrfmiddlewaretoken: '{{ csrf_token }}'
+    },
+    heightMin: 200,
+    heightMax: 500
+  });
+    </script>
   </div>
   <div class="mb-3">
     <label for="contact" class="form-label">Liên hệ</label>

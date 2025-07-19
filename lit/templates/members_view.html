@@ -2,15 +2,68 @@
 
 {% block title %}Thành viên: {{ members.name }}{% endblock %}
 
+
+{% block hero %}
+<!-- HERO SECTION -->
+<style>
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: 
+      linear-gradient(90deg, rgba(15,32,39,0.7) 0%, rgba(44,83,100,0.3) 100%),
+      url('https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D') center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 36px 0 24px 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,.09);
+  }
+  .hero-content {
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .hero-title {
+    font-size: 2.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .hero-desc {
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+  @media (max-width: 768px) {
+    .hero-section { height: 180px; }
+    .hero-title { font-size: 1.3rem; }
+    .hero-desc { font-size: 1rem; }
+  }
+</style>
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Giới thiệu thành viên</h1>
+  </div>
+</div>
+
+{% endblock %}
+
 {% block content %}
 <div class="card mx-auto" style="max-width: 600px;">
   {% if members.image %}
-  <img src="{{ members.image.url }}" class="card-img-top" alt="{{ members.name }}">
-  {% endif %}
-  <div class="card-body">
-    <h3 class="card-title">{{ members.name }}</h3>
-    <h5 class="text-muted">{{ members.role }}</h5>
-    <hr>
+      <div class="text-center">
+        <img src="{{ members.image.url }}" class="card-img-top rounded-circle text-center" style="width: 200px;height: 200px;" alt="{{ member.name }}">
+      </div>
+
+      {% endif %}
+      <div class="card-body text-center">
+        <h1 class="card-title">{{ members.name }}</h1>
+        <p class="card-subtitle text-muted">{{ members.role }}</p>
+        <hr>
     <div><strong>Giới thiệu:</strong> {{ members.bio|safe }}</div>
     <div><strong>Thành tích:</strong> {{ members.achievements|safe }}</div>
     <div><strong>Liên hệ:</strong> {{ members.contact }}</div>

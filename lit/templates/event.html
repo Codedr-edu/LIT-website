@@ -2,17 +2,74 @@
 
 {% block title %}Event & Cuộc thi - CLB Robot & Công Nghệ{% endblock %}
 
+{% block hero %}
+<!-- HERO SECTION -->
+<style>
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: 
+      linear-gradient(90deg, rgba(15,32,39,0.7) 0%, rgba(44,83,100,0.3) 100%),
+      url('https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D') center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 36px 0 24px 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,.09);
+  }
+  .hero-content {
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .hero-title {
+    font-size: 2.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .hero-desc {
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+  @media (max-width: 768px) {
+    .hero-section { height: 180px; }
+    .hero-title { font-size: 1.3rem; }
+    .hero-desc { font-size: 1rem; }
+  }
+</style>
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Danh sách Event & Cuộc thi</h1>
+    <p class="hero-desc">Đón chờ những tin tức cập nhật nóng hổi của LIT</p>
+  </div>
+</div>
+
+{% endblock %}
+
 {% block content %}
-<h2>Danh sách Event & Cuộc thi</h2>
 {% if events %}
-  <ul class="list-group">
   {% for event in events %}
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <a href="{% url 'event_view' event.id %}">{{ event.title }}</a>
-      <span class="badge bg-primary rounded-pill">{{ event.date|date:"d/m/Y H:i" }}</span>
-    </li>
+  <div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{% if event.image %}{{event.image.url}}{% else %}https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D{% endif %}" class="img-fluid rounded-start" style="object-fit: cover;" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ event.title }}</h5>
+        <a href="{% url 'event_view' event.id %}" class="btn btn-primary">Xem chi tiết</a>
+        <p class="card-text"><small class="text-body-secondary">{{ event.created|date:"d/m/Y H:i" }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
   {% endfor %}
-  </ul>
 {% else %}
   <p>Chưa có sự kiện nào.</p>
 {% endif %}
@@ -27,8 +84,23 @@
     <input type="text" name="title" id="title" class="form-control" required>
   </div>
   <div class="mb-3">
+    <label for="image" class="form-label">Ảnh bìa</label>
+    <input type="file" name="image" id="image" class="form-control">
+  </div>
+  <div class="mb-3">
     <label for="description" class="form-label">Mô tả</label>
-    <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
+   <textarea name="description" id="editor" class="form-control" required></textarea>
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@4.1.4/js/languages/vi.js"></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+    <script> 
+      var editor = new FroalaEditor('#editor',{
+    language: 'vi',  // Giao diện tiếng Việt
+    imageUploadURL: '/froala_image_upload/',
+    imageUploadParams: {
+      csrfmiddlewaretoken: '{{ csrf_token }}'
+    },
+  });
+    </script>
   </div>
   <div class="mb-3">
     <label for="date" class="form-label">Ngày & Giờ</label>

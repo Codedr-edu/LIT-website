@@ -2,9 +2,111 @@
 
 {% block title %}Trang chủ - CLB Robot & Công Nghệ{% endblock %}
 
-{% block content %}
-<div class="text-center my-5">
-  <h1>Chào mừng đến với Câu lạc bộ Robot & Công Nghệ</h1>
-  <p class="lead">Nơi hội tụ đam mê công nghệ và sáng tạo robot của học sinh trường cấp 3.</p>
+{% block hero %}
+<!-- HERO SECTION -->
+<style>
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: 
+      linear-gradient(90deg, rgba(15,32,39,0.7) 0%, rgba(44,83,100,0.3) 100%),
+      url('https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D') center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 36px 0 24px 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,.09);
+  }
+  .hero-content {
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .hero-title {
+    font-size: 2.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .hero-desc {
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+  @media (max-width: 768px) {
+    .hero-section { height: 180px; }
+    .hero-title { font-size: 1.3rem; }
+    .hero-desc { font-size: 1rem; }
+  }
+</style>
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Chào mừng đến với<br>CLB STEM LIT</h1>
+    <p class="hero-desc">Nơi tụ hội tài năng STEM của học sinh tỉnh Bắc Ninh. CLB được thành lập bởi các học sinh trường TH, THCS & THPT FPT Bắc Ninh</p>
+  </div>
 </div>
+
+{% endblock %}
+
+{% block content %}
+   <div class="row">
+        <div class="col">
+        <div style="padding: 5px;">
+            <h1 class="display-1">Về Team LIT</h1>
+            <p><b>CLB STEM LIT</b> là nơi tập hợp những học sinh đam mê công nghệ, robot và khoa học. Chúng tôi tổ chức các hoạt động, sự kiện và cuộc thi để phát triển kỹ năng và kiến thức cho các thành viên.<br><b>LIT</b> không chỉ là một cái tên. Đó là ngọn lửa của đam mê được thắp lên từ nhiệt huyết tuổi trẻ, là ánh sáng của trí tuệ soi rọi những ý tưởng đột phá. Với chúng tôi, LIT chính là khởi đầu cho hành trình dùng công nghệ để "thắp sáng" những giải pháp tiên phong, kiến tạo một tương lai rực rỡ hơn.</p>
+        </div>
+        </div>
+        <div class="col">
+            <img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/502733406_1408199106878757_1137266030957135866_n.jpg?stp=dst-jpg_p526x395_tt6&_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GTBuIEWFASEQ7kNvwFklqu4&_nc_oc=Adn92eKI-x_RMR83aFdaUqr4bfr88R1WITeItWRTBu2hltBm3VyQz-YVUaIF37nSgYQ&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=UZgChOKiO2tKsnzkZ9tSYQ&oh=00_AfSDJxPjIp5RFFkeiI2o39aEgwrfIGvWy4N8LzXC4Bv5SQ&oe=68810D40" class="rounded shadow-lg" alt="">
+        </div>
+    </div>
+    <div class="row" style="margin-top: 40px;">
+        <div class="col">
+            {% if news %}
+            <div class="card shadow-lg rounded">
+                    <img src="{% if news.image %}{{news.image.url}}{% else %}https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D{% endif %}" class="img-fluid rounded" style="object-fit: cover;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.title }}</h5>
+                        <a href="{% url 'news_view' news.id %}" class="btn btn-danger">Xem chi tiết</a>
+                        <p class="card-text"><small class="text-body-secondary">{{ news.created|date:"d/m/Y H:i" }}</small></p>
+                    </div>
+            </div>
+            {% else %}
+            <p>Chưa có tin tức nào.</p>
+            {% endif %}
+        </div>
+        <div class="col">
+            <div style="padding: 5px;">
+                <h1 class="display-1">Tin tức của LIT</h1>
+                <p>CLB STEM LIT là nơi tập hợp những học sinh đam mê công nghệ, robot và khoa học. Chúng tôi tổ chức các hoạt động, sự kiện và cuộc thi để phát triển kỹ năng và kiến thức cho các thành viên.</p>
+                <a href="{% url 'news' %}" class="btn btn-danger btn-lg">Xem thêm các tin tức khác của LIT</a>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 40px;">
+        <div class="col">
+        <div style="padding: 5px;">
+            <h1 class="display-1">Sự kiện của LIT</h1>
+            <p><b>CLB STEM LIT</b> là nơi tập hợp những học sinh đam mê công nghệ, robot và khoa học. Chúng tôi tổ chức các hoạt động, sự kiện và cuộc thi để phát triển kỹ năng và kiến thức cho các thành viên.<br><b>LIT</b> không chỉ là một cái tên. Đó là ngọn lửa của đam mê được thắp lên từ nhiệt huyết tuổi trẻ, là ánh sáng của trí tuệ soi rọi những ý tưởng đột phá. Với chúng tôi, LIT chính là khởi đầu cho hành trình dùng công nghệ để "thắp sáng" những giải pháp tiên phong, kiến tạo một tương lai rực rỡ hơn.</p>
+        </div>
+        </div>
+        <div class="col">
+            {% if event %}
+            <div class="card shadow-lg rounded">
+                    <img src="{% if event.image %}{{event.image.url}}{% else %}https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D{% endif %}" class="img-fluid rounded" style="object-fit: cover;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <a href="{% url 'event_view' event.id %}" class="btn btn-danger">Xem chi tiết</a>
+                        <p class="card-text"><small class="text-body-secondary">{{ event.created|date:"d/m/Y H:i" }}</small></p>
+                    </div>
+            </div>
+            {% else %}
+            <p>Chưa có tin tức nào.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
