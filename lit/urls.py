@@ -17,4 +17,6 @@ urlpatterns = [
     path('members/<int:id>/', views.members_view, name='members_view'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
+    path('froala_image_upload/', views.froala_image_upload,
+         name='froala_image_upload'),
 ]

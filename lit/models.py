@@ -1,13 +1,13 @@
 from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
+from froala_editor.fields import FroalaField
 
 
 class Member(models.Model):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
     role_order = models.PositiveIntegerField(default=0)  # Thứ tự xếp vai trò
-    bio = RichTextUploadingField(blank=True)
-    achievements = RichTextUploadingField(blank=True)
+    bio = FroalaField(blank=True)
+    achievements = FroalaField(blank=True)
     contact = models.CharField(max_length=200, blank=True)
     image = models.ImageField(upload_to='members/', blank=True)
 
@@ -17,20 +17,22 @@ class Member(models.Model):
 
 class Story(models.Model):
     title = models.CharField(max_length=200)
-    content = RichTextUploadingField()
+    content = FroalaField()
     image = models.ImageField(upload_to='stories/', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
 class News(models.Model):
     title = models.CharField(max_length=200)
-    content = RichTextUploadingField()
+    content = FroalaField()
+    image = models.ImageField(upload_to='news/', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
-    description = RichTextUploadingField()
+    description = FroalaField()
+    image = models.ImageField(upload_to='events/', blank=True, null=True)
     date = models.DateTimeField()
 
 
