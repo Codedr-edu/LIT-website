@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CLB LIT - FPT Schools Bắc Ninh</title>
+
+  <meta property="og:title" content="LIT STEM CLUB - CLB Robot & Công Nghệ">
+  <meta property="og:description" content="Nơi tụ hội tài năng STEM của học sinh tỉnh Bắc Ninh. CLB được thành lập bởi các học sinh trường TH, THCS & THPT FPT Bắc Ninh">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://litclub.pythonanywhere.com/">
+  <meta property="og:image" content="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D">
+  <meta property="og:site_name" content="LIT STEM CLUB - CLB Robot & Công Nghệ">
+
+  <link rel="shortcut icon" href="https://github.com/Codedr-edu/LIT-website/blob/main/media/%E1%BA%A2nh_ch%E1%BB%A5p_m%C3%A0n_h%C3%ACnh_2025-07-20_200918-removebg-preview.png?raw=true" type="image/x-icon">
+    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --lit-yellow: #d4b644;
+      --lit-orange: #ff7a18;
+      --dark-red-bg: #4a1a1a;
+      --nav-footer-bg: #3a1212;
+      --text-light: #f0e6a8;
+      --btn-hover: #b36f00;
+      --fire-color: #ff8124;
+      --card-bg-initial: rgba(255, 255, 255, 0.05);
+      --card-bg-hover: rgba(255, 122, 24, 0.15);
+    }
+
+    body {
+      margin: 0;
+      padding-top: 0;
+      background: #2b0808;
+      color: var(--text-light);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--nav-footer-bg);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1030;
+    }
+    /* CSS cho logo trên navbar */
+    .navbar-logo {
+      height: 50px; /* Điều chỉnh chiều cao phù hợp */
+      width: auto; /* Giữ tỷ lệ khung hình */
+    }
+    .navbar-nav .nav-link {
+      color: var(--lit-yellow) !important;
+      font-weight: 600;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--lit-orange) !important;
+      text-shadow: 0 0 8px rgba(255, 122, 24, 0.7);
+    }
+    .navbar-toggler-icon {
+      filter: invert(100%);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(43, 8, 8, 0.8) 0%, rgba(74, 26, 26, 0.8) 100%),
+        url("https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D") no-repeat center center/cover;
+      min-height: 100vh; /* Giả sử navbar cao 70px */
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+      box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3);
+      margin-top: 0;
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,122,24,0.4) 0%, rgba(74,26,26,0.6) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+    .hero-content img {
+      height: 95px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    }
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      text-shadow: 0 0 15px rgba(255, 122, 24, 0.6);
+    }
+    .hero-section p {
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 2.2rem;
+      color: var(--lit-yellow);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    }
+    .btn-warning {
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.75rem 2.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+    .btn-warning:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Icon lửa nhỏ (SVG) */
+    .icon-fire {
+      width: 22px;
+      height: 22px;
+      fill: var(--fire-color);
+      margin-right: 4px;
+      vertical-align: middle;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+        from { transform: scale(1); opacity: 0.9; }
+        to { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* Section Titles */
+    .section-title {
+      color: var(--lit-orange);
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--lit-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 0 10px rgba(255, 122, 24, 0.4);
+    }
+
+    /* Container sections */
+    section.container {
+      max-width: 1080px;
+      margin: 4rem auto;
+      background-color: var(--dark-red-bg);
+      border-radius: 20px;
+      padding: 3.5rem 4rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* About, Story Layout */
+    .section-row {
+      display: flex;
+      gap: 4rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .section-row .image-col,
+    .section-row .text-col {
+      flex: 1 1 45%;
+    }
+    .image-col img {
+      width: 100%;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .image-col img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+    }
+    #about p,
+    #story p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    #story p:last-of-type {
+        color: var(--lit-yellow);
+        font-weight: 500;
+        margin-top: 1.5rem;
+    }
+
+    /* Buttons (Outline for story section) */
+    .btn-outline-warning {
+      color: var(--lit-yellow);
+      border-color: var(--lit-yellow);
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.65rem 2.2rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      text-transform: uppercase;
+    }
+    .btn-outline-warning:hover {
+      background-color: var(--lit-orange);
+      border-color: var(--lit-orange);
+      color: #2b0808;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Cards for News & Events */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+    .card {
+      background: var(--card-bg-initial);
+      color: var(--text-light);
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover {
+      background-color: var(--card-bg-hover);
+      color: white;
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--lit-orange);
+    }
+    .card small {
+      font-size: 0.95rem;
+      color: var(--lit-yellow);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card small svg {
+        width: 18px;
+        height: 18px;
+    }
+    .card h4 {
+      margin: 0.8rem 0 1.2rem 0;
+      font-weight: 700;
+      color: var(--lit-yellow);
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
+    .card p {
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      flex-grow: 1;
+      margin-bottom: 1.5rem;
+    }
+    .card a {
+      color: var(--lit-yellow);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .card a:hover {
+      color: var(--lit-orange);
+      text-decoration: underline;
+      transform: translateX(5px);
+    }
+    /* Thêm icon mũi tên cho liên kết trong card */
+    .card a::after {
+        content: ' →';
+        font-size: 1.2em;
+        line-height: 1;
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+    .card a:hover::after {
+        transform: translateX(5px);
+    }
+
+    /* Contact Section */
+    #contact {
+      max-width: 650px;
+      margin: 4rem auto;
+      background-color: var(--dark-red-bg);
+      border-radius: 20px;
+      padding: 4rem 4.5rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      color: var(--text-light);
+    }
+    #contact form label {
+      font-weight: 600;
+      color: var(--lit-yellow);
+      margin-bottom: 8px;
+    }
+    #contact form input,
+    #contact form textarea {
+      background: #5a2222;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--lit-yellow);
+      padding: 16px 20px;
+      border-radius: 12px;
+      resize: vertical;
+      box-shadow: none;
+      font-size: 1.05rem;
+      width: 100%;
+      margin-top: 5px;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #contact form input::placeholder,
+    #contact form textarea::placeholder {
+      color: rgba(227, 212, 148, 0.7);
+    }
+    #contact form input:focus,
+    #contact form textarea:focus {
+      background: #7c3920;
+      border-color: var(--lit-orange);
+      outline: none;
+      box-shadow: 0 0 0 0.25rem rgba(255, 122, 24, 0.25);
+    }
+    #contact button {
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border: none;
+      border-radius: 35px;
+      padding: 16px 40px;
+      cursor: pointer;
+      margin-top: 25px;
+      width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
+    }
+    #contact button:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    #contact p.text-center {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    #contact span {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+
+    /* Footer */
+    .footer {
+      background-color: var(--nav-footer-bg);
+      color: var(--lit-yellow);
+      text-align: center;
+      padding: 40px 15px 30px 15px;
+      font-size: 1.05rem;
+      letter-spacing: 0.8px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.8;
+    }
+    .footer a {
+      color: var(--lit-yellow);
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: 600;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .footer a:hover {
+      color: var(--lit-orange);
+      text-decoration: none;
+      text-shadow: 0 0 5px rgba(255, 122, 24, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-section h1 {
+        font-size: 2.8rem;
+      }
+      .hero-section p {
+        font-size: 1.2rem;
+      }
+      .section-title {
+        font-size: 2.1rem;
+      }
+      section.container {
+        padding: 3rem;
+        margin: 3rem 1.5rem;
+      }
+      #contact {
+        padding: 3rem;
+        margin: 3rem 1.5rem;
+      }
+      .section-row {
+        gap: 2.5rem;
+      }
+      .section-row .image-col,
+      .section-row .text-col {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body {
+        padding-top: 0; /* Đảm bảo không có padding top trên mobile */
+      }
+      .navbar-logo {
+          height: 40px; /* Chiều cao nhỏ hơn trên thiết bị di động */
+      }
+      .hero-section {
+          min-height: calc(100vh - 60px); /* Nếu navbar cao 60px trên mobile */
+          padding: 70px 10px 50px; /* Tùy chỉnh padding nếu cần */
+      }
+      .hero-section h1 {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+      }
+      .hero-section p {
+        font-size: 1.05rem;
+      }
+      .btn-warning {
+        padding: 0.6rem 2rem;
+        font-size: 0.9rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+        text-align: center;
+        justify-content: center;
+      }
+      section.container {
+        padding: 2rem 1rem;
+        margin: 2rem 0.5rem;
+      }
+      #contact {
+        padding: 2.5rem 1.5rem;
+      }
+      .card {
+          padding: 1.5rem;
+          margin: auto;
+      }
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+      .footer {
+          font-size: 0.9rem;
+      }
+      .footer a {
+          margin: 0 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="#" aria-label="Trang chủ LIT Club">
+      <img src="https://github.com/Codedr-edu/LIT-website/blob/main/media/%E1%BA%A2nh_ch%E1%BB%A5p_m%C3%A0n_h%C3%ACnh_2025-07-20_200918-removebg-preview.png?raw=true" alt="Logo LIT Club" class="navbar-logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#" style="color: var(--lit-yellow);">Trang chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'news' %}" style="color: var(--lit-yellow);">Tin tức</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'event' %}" style="color: var(--lit-yellow);">Sự kiện</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'members' %}" style="color: var(--lit-yellow);">Thành viên</a></li>
+        <!--<li class="nav-item"><a class="nav-link" href="#about" style="color: var(--lit-yellow);">Về LIT</a></li>
+        <!--<li class="nav-item"><a class="nav-link" href="#contact" style="color: var(--lit-yellow);">Liên hệ</a></li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-section" role="banner">
+  <div class="hero-content container" role="heading" aria-level="1">
+    <img src="https://github.com/Codedr-edu/LIT-website/blob/main/media/%E1%BA%A2nh_ch%E1%BB%A5p_m%C3%A0n_h%C3%ACnh_2025-07-20_200918-removebg-preview.png?raw=true" alt="Logo LIT Club" />
+    <h1>TEAM LIT</h1>
+    <p>
+      Nơi tụ hội tài năng STEM của học sinh tỉnh Bắc Ninh. CLB được thành lập bởi các học sinh<br />
+      <span style="color: white; font-weight: 700; text-shadow: 0 0 5px rgba(255,255,255,0.5);">FPT Schools Bắc Ninh</span>
+    </p>
+    <a href="#about" class="btn btn-warning" role="button">
+      <i class="bi bi-fire"></i>
+      Khám phá thêm
+    </a>
+  </div>
+</section>
+
+<section id="about" class="container" tabindex="0" aria-label="Về Chúng Tôi">
+  <h2 class="section-title">
+    <i class="bi bi-fire"></i>
+    Về Chúng Tôi
+  </h2>
+  <div class="section-row">
+    <div class="image-col">
+      <img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D" alt="Đam mê công nghệ" />
+    </div>
+    <div class="text-col">
+      <p>
+        CLB STEM LIT là nơi tập hợp những học sinh đam mê công nghệ, robot và khoa học. Chúng tôi tổ chức các hoạt động, sự kiện và cuộc thi để phát triển kỹ năng và kiến thức cho các thành viên.
+      </p>
+      <a href="#story" class="btn btn-warning mt-3" role="button">
+        <i class="bi bi-fire"></i>
+        Khám phá câu chuyện
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="container" tabindex="0" aria-label="Câu Chuyện của LIT">
+  <h2 class="section-title">
+    <i class="bi bi-fire"></i>
+    Câu Chuyện Của LIT
+  </h2>
+  <div class="section-row" style="flex-direction: row-reverse;">
+    <div class="image-col">
+      <img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/502733406_1408199106878757_1137266030957135866_n.jpg?stp=dst-jpg_p526x395_tt6&_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GTBuIEWFASEQ7kNvwFklqu4&_nc_oc=Adn92eKI-x_RMR83aFdaUqr4bfr88R1WITeItWRTBu2hltBm3VyQz-YVUaIF37nSgYQ&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=UZgChOKiO2tKsnzkZ9tSYQ&oh=00_AfSDJxPjIp5RFFkeiI2o39aEgwrfIGvWy4N8LzXC4Bv5SQ&oe=68810D40" alt="Câu chuyện LIT" />
+    </div>
+    <div class="text-col">
+      <p>
+        LIT không chỉ là một cái tên. Đó là ngọn lửa của đam mê được thắp lên từ nhiệt huyết tuổi trẻ, là ánh sáng của trí tuệ soi rọi những ý tưởng đột phá. Với chúng tôi, LIT chính là khởi đầu cho hành trình dùng công nghệ để "thắp sáng" những giải pháp tiên phong, kiến tạo một tương lai rực rỡ hơn.
+      </p>
+      <!--<a href="#contact" class="btn btn-outline-warning mt-3" role="button">
+        <i class="bi bi-fire"></i>
+        Liên hệ ngay
+      </a>-->
+    </div>
+  </div>
+</section>
+
+<section id="news" class="container" tabindex="0" aria-label="Tin Tức Mới Nhất">
+  <h2 class="section-title">
+    <i class="bi bi-fire"></i>
+    Tin Tức Mới Nhất
+  </h2>
+  <div class="card-container" role="list">
+    {% if news %}
+    <article class="card" role="listitem" tabindex="0">
+      <small>
+        <i class="bi bi-fire"></i> {{news.created|date:"d/m/Y H:i"}}
+      </small>
+      <h4>{{news.title}}</h4>
+     <a href="{% url 'news_view' id=news.id %}" aria-label="Xem chi tiết tin tức Giải Nhất Cuộc Thi Hackathon">Xem chi tiết</a>
+    </article>
+    {% else %}
+    <p>Chưa có tin tức nào</p>
+    {% endif %}
+  </div>
+  <div class="text-center">
+    <a href="{% url 'news' %}" class="btn btn-warning mt-3" role="button" aria-label="Xem thêm tin tức">
+      <i class="bi bi-fire"></i>
+      Xem thêm tin tức
+    </a>
+  </div>
+</section>
+
+<section id="events" class="container" tabindex="0" aria-label="Sự Kiện Mới Nhất">
+  <h2 class="section-title">
+    <i class="bi bi-fire"></i>
+    Sự Kiện Mới Nhất
+  </h2>
+  <div class="card-container" role="list">
+    {% if event %}
+    <article class="card" role="listitem" tabindex="0">
+      <small>
+        <i class="bi bi-fire"></i>
+        {{ event.date|date:"d/m/Y H:i" }}
+      </small>
+      <h4>{{event.title}}</h4>
+      <a href="#" class="title-1" aria-label="Tìm hiểu chi tiết sự kiện LIT Tech Day 2025">Tìm hiểu</a>
+    </article>
+    {% else %}
+    <p>Chưa có sự kiện nào</p>
+    {% endif %}
+  </div>
+  <div class="text-center">
+    <a href="{% url 'event' %}" class="btn btn-warning mt-3" role="button" aria-label="Xem thêm sự kiện">
+      <i class="bi bi-fire"></i>
+      Xem thêm sự kiện
+    </a>
+  </div>
+</section>
+
+<!--<section id="contact" tabindex="0" aria-label="Liên hệ với CLB LIT">
+  <h2 class="section-title" style="max-width: fit-content; margin: 2rem auto 1rem;">
+    <i class="bi bi-fire"></i>
+    Liên Hệ Với Chúng Tôi
+  </h2>
+  <form class="mx-auto" style="max-width: 600px;">
+    <div class="mb-3">
+        <label for="name" class="form-label">Họ & Tên*</label>
+        <input type="text" id="name" class="form-control" placeholder="Họ & Tên" required />
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email*</label>
+        <input type="email" id="email" class="form-control" placeholder="Email" required />
+    </div>
+    <div class="mb-3">
+        <label for="message" class="form-label">Nội dung liên hệ</label>
+        <textarea id="message" class="form-control" rows="5" placeholder="Nhập nội dung..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-warning" aria-label="Gửi thông tin liên hệ">
+      <i class="bi bi-fire"></i>
+      Gửi
+    </button>
+  </form>
+  <p class="text-center mt-4" style="font-weight: 600;">
+    Hoặc email: <a href="mailto:litclub.fptbn@gmail.com" style="color: var(--lit-yellow); text-decoration: underline;">litclub.fptbn@gmail.com</a>
+  </p>
+</section>-->
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div>LIT Club © 2025 FPT Schools Bắc Ninh</div>
+    <div class="mt-2 mb-2">
+      <a href="https://www.facebook.com/LITstemclub" target="_blank" aria-label="Facebook CLB LIT">Facebook</a> |
+      <a href="mailto:litrobotics99@gmail.com" target="_blank" aria-label="YouTube CLB LIT">Email</a> |
+      <a href="https://zalo.me/0989241725" target="_blank" aria-label="GitHub CLB LIT">Zalo</a>
+    </div>
+    <div>
+      Địa chỉ: Trường TH, THCS & THPT FPT Bắc Ninh<br />
+      Điện thoại: 0989241725 (Nguyễn Tiến Đạt)<br />
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
