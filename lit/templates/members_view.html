@@ -1,73 +1,829 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Giới Thiệu Thành Viên - LIT CLUB</title>
 
-{% block title %}Thành viên: {{ members.name }}{% endblock %}
+<meta property="og:title" content="LIT STEM CLUB - CLB Robot & Công Nghệ">
+  <meta property="og:description" content="Nơi tụ hội tài năng STEM của học sinh tỉnh Bắc Ninh. CLB được thành lập bởi các học sinh trường TH, THCS & THPT FPT Bắc Ninh">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://litclub.pythonanywhere.com/">
+  <meta property="og:image" content="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D">
+  <meta property="og:site_name" content="LIT STEM CLUB - CLB Robot & Công Nghệ">
+
+  <link rel="shortcut icon" href="https://github.com/Codedr-edu/LIT-website/blob/main/media/%E1%BA%A2nh_ch%E1%BB%A5p_m%C3%A0n_h%C3%ACnh_2025-07-20_200918-removebg-preview.png?raw=true" type="image/x-icon">
+    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 
-{% block hero %}
-<!-- HERO SECTION -->
+
 <style>
-  .hero-section {
-    position: relative;
-    width: 100%;
-    height: 340px;
-    background: 
-      linear-gradient(90deg, rgba(15,32,39,0.7) 0%, rgba(44,83,100,0.3) 100%),
-      url('https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D') center center / cover no-repeat;
+    :root {
+      --lit-yellow: #d4b644;
+      --lit-orange: #ff7a18;
+      --dark-red-bg: #4a1a1a;
+      --nav-footer-bg: #3a1212;
+      --text-light: #f0e6a8;
+      --btn-hover: #b36f00;
+      --fire-color: #ff8124;
+      --card-bg-initial: rgba(255, 255, 255, 0.05);
+      --card-bg-hover: rgba(255, 122, 24, 0.15);
+      --code-bg: #222;
+      --code-border: #444;
+      --code-text: #ccc;
+    }
+
+    .back-to-events-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2rem;
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.75rem 1.8rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+
+    .back-to-events-button:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .register-button {
+      background-color: var(--lit-orange); 
+      color: #fff;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.9rem 3rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      font-size: 1.15rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+    .register-button:hover {
+      background-color: #e66a15;
+      color: #fff;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    .register-button svg {
+        fill: white;
+        width: 24px;
+        height: 24px;
+    }
+    body {
+      margin: 0;
+      padding-top: 0;
+      background: #2b0808;
+      color: var(--text-light);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--nav-footer-bg);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1030;
+    }
+    .navbar-brand {
+        color: var(--lit-yellow) !important;
+        font-weight: 700;
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        text-shadow: 0 0 5px rgba(255, 122, 24, 0.5);
+    }
+    .navbar-nav .nav-link {
+      color: var(--lit-yellow) !important;
+      font-weight: 600;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--lit-orange) !important;
+      text-shadow: 0 0 8px rgba(255, 122, 24, 0.7);
+    }
+    .navbar-toggler-icon {
+      filter: invert(100%);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(43, 8, 8, 0.8) 0%, rgba(74, 26, 26, 0.8) 100%),
+        url("https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D") no-repeat center center/cover;
+      min-height: calc(100vh - 70px);
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+      box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3);
+      margin-top: 0;
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,122,24,0.4) 0%, rgba(74,26,26,0.6) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+    .hero-content img {
+      height: 95px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    }
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      text-shadow: 0 0 15px rgba(255, 122, 24, 0.6);
+    }
+    .hero-section p {
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 2.2rem;
+      color: var(--lit-yellow);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    }
+    .btn-warning {
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.75rem 2.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+    .btn-warning:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Icon lửa nhỏ (SVG) */
+    .icon-fire {
+      width: 22px;
+      height: 22px;
+      fill: var(--fire-color);
+      margin-right: 4px;
+      vertical-align: middle;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+        from { transform: scale(1); opacity: 0.9; }
+        to { transform: scale(1.1); opacity: 1; }
+    }
+
+  
+    .section-title {
+      color: var(--lit-orange);
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--lit-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 0 10px rgba(255, 122, 24, 0.4);
+      width: 100%;
+    }
+
+
+    section.container {
+      max-width: 1080px;
+      margin: 4rem auto;
+      background-color: var(--dark-red-bg);
+      border-radius: 20px;
+      padding: 3.5rem 4rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+
+    .section-row {
+      display: flex;
+      gap: 4rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .section-row .image-col,
+    .section-row .text-col {
+      flex: 1 1 45%;
+    }
+    .image-col img {
+      width: 100%;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .image-col img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+    }
+    #about p,
+    #story p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    #story p:last-of-type {
+        color: var(--lit-yellow);
+        font-weight: 500;
+        margin-top: 1.5rem;
+    }
+
+
+    .btn-outline-warning {
+      color: var(--lit-yellow);
+      border-color: var(--lit-yellow);
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.65rem 2.2rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      text-transform: uppercase;
+    }
+    .btn-outline-warning:hover {
+      background-color: var(--lit-orange);
+      border-color: var(--lit-orange);
+      color: #2b0808;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
+    }
+
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+    .card {
+      background: var(--card-bg-initial);
+      color: var(--text-light);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover {
+      background-color: var(--card-bg-hover);
+      color: white;
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--lit-orange);
+    }
+
+
+    .card .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover .card-img {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card small {
+      font-size: 0.95rem;
+      color: var(--lit-yellow);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card small svg {
+        width: 18px;
+        height: 18px;
+    }
+    .card h4 {
+      margin: 0.8rem 0 1.2rem 0;
+      font-weight: 700;
+      color: var(--lit-yellow);
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
+    .card p {
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      flex-grow: 1;
+      margin-bottom: 1.5rem;
+    }
+    .card a {
+      color: var(--lit-yellow);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .card a:hover {
+      color: var(--lit-orange);
+      text-decoration: underline;
+      transform: translateX(5px);
+    }
+
+    .card a::after {
+        content: ' →';
+        font-size: 1.2em;
+        line-height: 1;
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+    .card a:hover::after {
+        transform: translateX(5px);
+    }
+
+
+    #contact {
+      max-width: 650px;
+      margin: 4rem auto;
+      background-color: var(--dark-red-bg);
+      border-radius: 20px;
+      padding: 4rem 4.5rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      color: var(--text-light);
+    }
+    #contact form label {
+      font-weight: 600;
+      color: var(--lit-yellow);
+      margin-bottom: 8px;
+    }
+    #contact form input,
+    #contact form textarea {
+      background: #5a2222;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--lit-yellow);
+      padding: 16px 20px;
+      border-radius: 12px;
+      resize: vertical;
+      box-shadow: none;
+      font-size: 1.05rem;
+      width: 100%;
+      margin-top: 5px;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #contact form input::placeholder,
+    #contact form textarea::placeholder {
+      color: rgba(227, 212, 148, 0.7);
+    }
+    #contact form input:focus,
+    #contact form textarea:focus {
+      background: #7c3920;
+      border-color: var(--lit-orange);
+      outline: none;
+      box-shadow: 0 0 0 0.25rem rgba(255, 122, 24, 0.25);
+    }
+
+    .navbar-logo {
+      height: 50px; 
+      width: auto; 
+    }
+    #contact button {
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border: none;
+      border-radius: 35px;
+      padding: 16px 40px;
+      cursor: pointer;
+      margin-top: 25px;
+      width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
+    }
+    #contact button:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    #contact p.text-center {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    #contact span {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .footer {
+      background-color: var(--nav-footer-bg);
+      color: var(--lit-yellow);
+      text-align: center;
+      padding: 40px 15px 30px 15px;
+      font-size: 1.05rem;
+      letter-spacing: 0.8px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.8;
+    }
+    .footer a {
+      color: var(--lit-yellow);
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: 600;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .footer a:hover {
+      color: var(--lit-orange);
+      text-decoration: none;
+      text-shadow: 0 0 5px rgba(255, 122, 24, 0.5);
+    }
+
+   
+    .member-card {
+      background: var(--card-bg-initial);
+      color: var(--text-light);
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .member-card:hover {
+      background-color: var(--card-bg-hover);
+      color: white;
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--lit-orange);
+    }
+
+    .member-card .member-avatar {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid var(--lit-yellow);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .member-card:hover .member-avatar {
+      transform: scale(1.05);
+      border-color: var(--lit-orange);
+    }
+
+    .member-card h4 {
+      margin: 0.8rem 0 0.5rem 0;
+      font-weight: 700;
+      color: var(--lit-orange);
+      font-size: 1.8rem;
+      line-height: 1.2;
+    }
+
+    .member-card .member-position {
+      font-size: 1.1rem;
+      color: var(--lit-yellow);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .member-card .member-position svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--lit-yellow);
+    }
+
+    .member-card p {
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      min-height: 60px;
+    }
+
+    .member-card .social-links a {
+      color: var(--lit-yellow);
+      font-size: 1.5rem;
+      margin: 0 8px;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .member-card .social-links a:hover {
+      color: var(--lit-orange);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-section h1 {
+        font-size: 2.8rem;
+      }
+      .hero-section p {
+        font-size: 1.2rem;
+      }
+      .section-title {
+        font-size: 2.1rem;
+      }
+      section.container {
+        padding: 3rem;
+        margin: 3rem 1.5rem;
+      }
+      .member-card {
+        padding: 1.5rem;
+      }
+      .member-card .member-avatar {
+        width: 120px;
+        height: 120px;
+      }
+      .member-card h4 {
+        font-size: 1.6rem;
+      }
+      .member-card .member-position {
+        font-size: 1rem;
+      }
+      .member-card p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body {
+        padding-top: 0;
+      }
+      .navbar-brand {
+          font-size: 1.2rem;
+      }
+      .hero-section {
+          min-height: calc(100vh - 60px);
+          padding: 70px 10px 50px;
+      }
+      .hero-section h1 {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+      }
+      .hero-section p {
+        font-size: 1.05rem;
+      }
+      .btn-warning {
+        padding: 0.6rem 2rem;
+        font-size: 0.9rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+        text-align: center;
+        justify-content: center;
+      }
+      section.container {
+        padding: 2rem 1rem;
+        margin: 2rem 0.5rem;
+      }
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+      .member-card .member-avatar {
+        width: 100px;
+        height: 100px;
+      }
+      .member-card h4 {
+        font-size: 1.4rem;
+      }
+      .member-card .member-position {
+        font-size: 0.9rem;
+      }
+      .member-card p {
+        font-size: 0.95rem;
+      }
+      .footer {
+          font-size: 0.9rem;
+      }
+      .footer a {
+          margin: 0 8px;
+      }
+    }
+  
+  .profile-section {
+    max-width: 900px;
+    margin: 2.5rem auto 1.2rem auto;
+    background: var(--dark-red-bg);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: none;
+    color: var(--text-light);
+  }
+  .profile-row {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .profile-avatar {
+    flex: 0 0 180px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .profile-avatar img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--lit-orange);
+    background: #fff7e9;
+  }
+  .profile-info {
+    flex: 1 1 auto;
+  }
+  .profile-info h2 {
+    color: var(--lit-orange);
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 36px 0 24px 0;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px 0 rgba(0,0,0,.09);
+    gap: 8px;
+    animation: glowSoft 3s ease-in-out infinite alternate;
   }
-  .hero-content {
-    color: #fff;
-    text-align: center;
-    z-index: 2;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  .profile-info .position {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--lit-yellow);
   }
-  .hero-title {
-    font-size: 2.7rem;
+  .profile-info p {
+    font-size: 1.12rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+  }
+  .profile-info .section-title {
+    color: var(--lit-orange);
+    font-size: 1.3rem;
     font-weight: 700;
-    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    animation: glowSoft 3s ease-in-out infinite alternate;
   }
-  .hero-desc {
-    font-size: 1.35rem;
-    font-weight: 400;
-    margin-top: 1rem;
-    margin-bottom: 0;
-  }
-  @media (max-width: 768px) {
-    .hero-section { height: 180px; }
-    .hero-title { font-size: 1.3rem; }
-    .hero-desc { font-size: 1rem; }
-  }
-</style>
+  
 
-<div class="hero-section">
-  <div class="hero-content">
-    <h1 class="hero-title">Giới thiệu thành viên</h1>
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="#" aria-label="Trang chủ LIT Club">
+      <img src="https://github.com/Codedr-edu/LIT-website/blob/main/media/%E1%BA%A2nh_ch%E1%BB%A5p_m%C3%A0n_h%C3%ACnh_2025-07-20_200918-removebg-preview.png?raw=true" alt="Logo LIT Club" class="navbar-logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}" style="color: var(--lit-yellow);">Trang chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'news' %}" style="color: var(--lit-yellow);">Tin tức</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'event' %}" style="color: var(--lit-yellow);">Sự kiện</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'members' %}" style="color: var(--lit-yellow);">Thành viên</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about" style="color: var(--lit-yellow);">Về LIT</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact" style="color: var(--lit-yellow);">Liên hệ</a></li>
+      </ul>
+    </div>
   </div>
-</div>
+</nav>
 
-{% endblock %}
-
-{% block content %}
-<div class="card mx-auto" style="max-width: 600px;">
-  {% if members.image %}
-      <div class="text-center">
-        <img src="{{ members.image.url }}" class="card-img-top rounded-circle text-center" style="width: 200px;height: 200px;" alt="{{ member.name }}">
-      </div>
-
-      {% endif %}
-      <div class="card-body text-center">
-        <h1 class="card-title">{{ members.name }}</h1>
-        <p class="card-subtitle text-muted">{{ members.role }}</p>
-        <hr>
-    <div><strong>Giới thiệu:</strong> {{ members.bio|safe }}</div>
-    <div><strong>Thành tích:</strong> {{ members.achievements|safe }}</div>
-    <div><strong>Liên hệ:</strong> {{ members.contact }}</div>
-    <a href="{% url 'members' %}" class="btn btn-secondary mt-3">Quay lại danh sách thành viên</a>
+<!-- Hero Section -->
+<section class="hero-section" style="min-height: 30vh; padding-top: 100px; padding-bottom: 30px;" role="banner">
+  <div class="hero-content container">
+    <h1 style="font-size: 3rem; margin-bottom: 10px;">Thành Viên</h1>
   </div>
-</div>
-{% endblock %}
+</section>
+
+<!-- Profile Section -->
+<section class="profile-section" aria-label="Thông tin thành viên">
+  <div class="profile-row">
+    <div class="row">
+        <div class="col-lg-4" style="margin-bottom: 30px;">
+            <div class="profile-avatar">
+                <img src="{% if member.image %}{{member.image.url}}{% else %}https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/517613509_122100055322943826_2555824084297775747_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=dGlkViM4WSEQ7kNvwFacD2A&_nc_oc=Adntbdr88S4R6fUaBWXejHhFZMjgbmLLMjX1rDNyizRRht9B33qZF6M8PXPm0gb9y-Y&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=bulb8zwm1XqLBoqy20fOWw&oh=00_AfRNk9_Vr0rrIW_BlMUrMgSVNC9JidAsmxuh46HORFdu-Q&oe=68880511{% endif %}" alt="Ảnh đại diện Nguyễn Minh Tuấn" />
+            </div>
+        </div>
+        <div class="col-lg w-100">
+            <div class="profile-info">
+                <h2>
+                    <i class="bi bi-fire"></i>
+                    {{member.name}}
+                </h2>
+                <div class="position">{{member.role}}</div>
+                <div class="section-title">
+                    <i class="bi bi-fire"></i>
+                    Giới thiệu
+                </div>
+                {{member.bio|safe}}
+                <div class="section-title w-100" style="margin-top: 1.5rem;">
+                    <i class="bi bi-fire"></i>
+                    Thành tích & dấu ấn cá nhân
+                </div>
+                {{member.achievements|safe}}
+            </div>
+        </div>
+    </div>
+  </div>
+  <br>
+    <a href="/members" class="back-to-events-button" aria-label="Quay lại trang Sự kiện">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/>
+      </svg>
+      Quay Lại Trang Thành viên
+    </a>
+</section>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div>LIT Club © 2025 FPT Schools Bắc Ninh</div>
+    <div class="mt-2 mb-2">
+      <a href="https://www.facebook.com/LITstemclub" target="_blank" aria-label="Facebook CLB LIT">Facebook</a> |
+      <a href="mailto:litrobotics99@gmail.com" target="_blank" aria-label="YouTube CLB LIT">Email</a> |
+      <a href="https://zalo.me/0989241725" target="_blank" aria-label="GitHub CLB LIT">Zalo</a>
+    </div>
+    <div>
+      Địa chỉ: Trường TH, THCS & THPT FPT Bắc Ninh<br />
+      Điện thoại: 0989241725 (Nguyễn Tiến Đạt)<br />
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

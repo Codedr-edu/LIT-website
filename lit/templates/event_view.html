@@ -1,62 +1,922 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tên Sự Kiện Cụ Thể - Sự Kiện CLB LIT - FPT Schools Bắc Ninh</title>
 
-{% block title %}Event: {{ events.title }}{% endblock %}
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-{% block hero %}
-<!-- HERO SECTION -->
-<style>
-  .hero-section {
-    position: relative;
-    width: 100%;
-    height: 340px;
-    background: 
-      linear-gradient(90deg, rgba(15,32,39,0.7) 0%, rgba(44,83,100,0.3) 100%),
-      url('{% if event.image %}{{event.image.url}}{% else %}https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/517737809_122100053498943826_3327007350081078447_n.png?_nc_cat=107&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=edONUK9z7kkQ7kNvwGrcQv7&_nc_oc=AdkRdS-VL0_JPfxBJv-XMhR_XPRw6BcxfGIvM441XgvNj4YQEuV7E0WNzscIUV9WT8I&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=oQXmcf39N5CEF7QDQIN0hw&oh=00_AfTGO5IfzsEbxFCqddWx-S-7SJlJnywSnTXyjgdq0DteCQ&oe=68801A5D{% endif %}') center center / cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 36px 0 24px 0;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px 0 rgba(0,0,0,.09);
-  }
-  .hero-content {
-    color: #fff;
-    text-align: center;
-    z-index: 2;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
-  }
-  .hero-title {
-    font-size: 2.7rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-  }
-  .hero-desc {
-    font-size: 1.35rem;
-    font-weight: 400;
-    margin-top: 1rem;
-    margin-bottom: 0;
-  }
-  @media (max-width: 768px) {
-    .hero-section { height: 180px; }
-    .hero-title { font-size: 1.3rem; }
-    .hero-desc { font-size: 1rem; }
-  }
-</style>
+  <style>
+    :root {
+      --lit-yellow: #d4b644;
+      --lit-orange: #ff7a18;
+      --dark-red-bg: #4a1a1a;
+      --nav-footer-bg: #3a1212;
+      --text-light: #f0e6a8;
+      --btn-hover: #b36f00;
+      --fire-color: #ff8124;
+      --card-bg-initial: rgba(255, 255, 255, 0.05);
+      --card-bg-hover: rgba(255, 122, 24, 0.15);
+      --code-bg: #222;
+      --code-border: #444;
+      --code-text: #ccc;
+    }
 
-<div class="hero-section">
-  <div class="hero-content">
-    <h1 class="hero-title">{{ events.title }}</h1>
-    <p class="hero-desc">{{ events.date|date:"d/m/Y H:i" }}</p>
+    body {
+      margin: 0;
+      padding-top: 0;
+      background: #2b0808;
+      color: var(--text-light);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--nav-footer-bg);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1030;
+    }
+    .navbar-brand {
+        color: var(--lit-yellow) !important;
+        font-weight: 700;
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        text-shadow: 0 0 5px rgba(255, 122, 24, 0.5);
+    }
+    .navbar-nav .nav-link {
+      color: var(--lit-yellow) !important;
+      font-weight: 600;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--lit-orange) !important;
+      text-shadow: 0 0 8px rgba(255, 122, 24, 0.7);
+    }
+    .navbar-toggler-icon {
+      filter: invert(100%);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(43, 8, 8, 0.8) 0%, rgba(74, 26, 26, 0.8) 100%),
+        url("https://images.unsplash.com/photo-1550009139-0125608d4a96?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center/cover;
+      min-height: calc(100vh - 70px);
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+      box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3);
+      margin-top: 0;
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,122,24,0.4) 0%, rgba(74,26,26,0.6) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+    .hero-content img {
+      height: 95px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    }
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      text-shadow: 0 0 15px rgba(255, 122, 24, 0.6);
+    }
+    .hero-section p {
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 2.2rem;
+      color: var(--lit-yellow);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    }
+    .btn-warning {
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.75rem 2.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+    .btn-warning:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Icon lửa nhỏ (SVG) */
+    .icon-fire {
+      width: 22px;
+      height: 22px;
+      fill: var(--fire-color);
+      margin-right: 4px;
+      vertical-align: middle;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+        from { transform: scale(1); opacity: 0.9; }
+        to { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* Section Titles */
+    .section-title {
+      color: var(--lit-orange);
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--lit-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 0 10px rgba(255, 122, 24, 0.4);
+    }
+
+    /* Container sections */
+    section.container {
+      max-width: 1080px;
+      margin: 4rem auto;
+      background-color: var(--dark-red-bg);
+      border-radius: 20px;
+      padding: 3.5rem 4rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* About, Story Layout (Có thể không cần nếu trang tin tức không có phần này) */
+    .section-row {
+      display: flex;
+      gap: 4rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .section-row .image-col,
+    .section-row .text-col {
+      flex: 1 1 45%;
+    }
+    .image-col img {
+      width: 100%;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .image-col img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+    }
+    #about p,
+    #story p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    #story p:last-of-type {
+        color: var(--lit-yellow);
+        font-weight: 500;
+        margin-top: 1.5rem;
+    }
+
+    /* Buttons (Outline for story section) */
+    .btn-outline-warning {
+      color: var(--lit-yellow);
+      border-color: var(--lit-yellow);
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.65rem 2.2rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      text-transform: uppercase;
+    }
+    .btn-outline-warning:hover {
+      background-color: var(--lit-orange);
+      border-color: var(--lit-orange);
+      color: #2b0808;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Cards for News & Events */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+    .card {
+      background: var(--card-bg-initial);
+      color: var(--text-light);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover {
+      background-color: var(--card-bg-hover);
+      color: white;
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--lit-orange);
+    }
+
+    /* CSS cho ảnh bìa trong card */
+    .card .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover .card-img {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card small {
+      font-size: 0.95rem;
+      color: var(--lit-yellow);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card small svg {
+        width: 18px;
+        height: 18px;
+    }
+    .card h4 {
+      margin: 0.8rem 0 1.2rem 0;
+      font-weight: 700;
+      color: var(--lit-yellow);
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
+    .card p {
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      flex-grow: 1;
+      margin-bottom: 1.5rem;
+    }
+    .card a {
+      color: var(--lit-yellow);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .card a:hover {
+      color: var(--lit-orange);
+      text-decoration: underline;
+      transform: translateX(5px);
+    }
+    /* Thêm icon mũi tên cho liên kết trong card */
+    .card a::after {
+        content: ' →';
+        font-size: 1.2em;
+        line-height: 1;
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+    .card a:hover::after {
+        transform: translateX(5px);
+    }
+
+    /* Contact Section (Có thể không cần nếu trang tin tức không có phần này) */
+    #contact {
+      max-width: 650px;
+      margin: 4rem auto;
+      background-color: var(--dark-red-bg);
+      border-radius: 20px;
+      padding: 4rem 4.5rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      color: var(--text-light);
+    }
+    #contact form label {
+      font-weight: 600;
+      color: var(--lit-yellow);
+      margin-bottom: 8px;
+    }
+    #contact form input,
+    #contact form textarea {
+      background: #5a2222;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--lit-yellow);
+      padding: 16px 20px;
+      border-radius: 12px;
+      resize: vertical;
+      box-shadow: none;
+      font-size: 1.05rem;
+      width: 100%;
+      margin-top: 5px;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #contact form input::placeholder,
+    #contact form textarea::placeholder {
+      color: rgba(227, 212, 148, 0.7);
+    }
+    #contact form input:focus,
+    #contact form textarea:focus {
+      background: #7c3920;
+      border-color: var(--lit-orange);
+      outline: none;
+      box-shadow: 0 0 0 0.25rem rgba(255, 122, 24, 0.25);
+    }
+    #contact button {
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border: none;
+      border-radius: 35px;
+      padding: 16px 40px;
+      cursor: pointer;
+      margin-top: 25px;
+      width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
+    }
+    #contact button:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    #contact p.text-center {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    #contact span {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+
+    /* Footer */
+    .footer {
+      background-color: var(--nav-footer-bg);
+      color: var(--lit-yellow);
+      text-align: center;
+      padding: 40px 15px 30px 15px;
+      font-size: 1.05rem;
+      letter-spacing: 0.8px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.8;
+    }
+    .footer a {
+      color: var(--lit-yellow);
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: 600;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .footer a:hover {
+      color: var(--lit-orange);
+      text-decoration: none;
+      text-shadow: 0 0 5px rgba(255, 122, 24, 0.5);
+    }
+
+    /* Search Bar Specific Styles */
+    .search-bar {
+      margin-bottom: 2.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .search-bar .form-control {
+      background: #5a2222;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--lit-yellow);
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      flex-grow: 1;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search-bar .form-control::placeholder {
+      color: rgba(227, 212, 148, 0.7);
+    }
+
+    .search-bar .form-control:focus {
+      background: #7c3920;
+      border-color: var(--lit-orange);
+      outline: none;
+      box-shadow: 0 0 0 0.25rem rgba(255, 122, 24, 0.25);
+    }
+
+    .search-bar .btn {
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 25px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .search-bar .btn:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* EVENT DETAIL PAGE SPECIFIC STYLES */
+    .event-detail-content {
+      max-width: 900px; /* Adjust max-width for content area */
+      margin: 2rem auto;
+      background-color: var(--dark-red-bg);
+      border-radius: 20px;
+      padding: 3.5rem 4rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      color: var(--text-light);
+    }
+
+    .event-detail-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .event-detail-header h1 {
+      font-size: 3rem;
+      color: var(--lit-orange);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      text-shadow: 0 0 10px rgba(255, 122, 24, 0.4);
+    }
+
+    .event-detail-header img {
+      width: 100%;
+      max-height: 450px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      margin-bottom: 2rem;
+    }
+
+    .event-detail-meta {
+      font-size: 1rem;
+      color: var(--lit-yellow);
+      display: flex;
+      flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 1rem;
+      margin-bottom: 2rem; /* Khoảng cách với phần nội dung chính */
+    }
+    .event-detail-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+    .event-detail-meta svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--fire-color); /* Sử dụng màu lửa cho icon */
+    }
+
+    .event-detail-body h3 {
+      font-size: 2rem;
+      color: var(--lit-yellow);
+      margin-top: 2.5rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .event-detail-body p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      text-align: justify;
+    }
+
+    .event-detail-body ul {
+        list-style: none; /* Remove default bullet */
+        padding-left: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .event-detail-body ul li {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+        padding-left: 25px; /* Space for custom bullet */
+        position: relative;
+    }
+
+    .event-detail-body ul li::before {
+        content: '\2022'; /* Unicode for bullet point */
+        color: var(--lit-orange);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .event-detail-body pre {
+      background-color: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin-bottom: 2rem;
+    }
+
+    .event-detail-body code {
+      font-family: 'Fira Code', 'JetBrains Mono', monospace; /* Preferred coding font */
+      font-size: 0.95rem;
+      color: var(--code-text);
+      display: block; /* Make code block take full width */
+      white-space: pre-wrap; /* Ensure wrapping for long lines */
+    }
+
+    .register-button {
+      background-color: var(--lit-orange); /* Nút đăng ký màu cam nổi bật */
+      color: #fff;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.9rem 3rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      font-size: 1.15rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+    .register-button:hover {
+      background-color: #e66a15;
+      color: #fff;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    .register-button svg {
+        fill: white;
+        width: 24px;
+        height: 24px;
+    }
+
+    .back-to-events-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2rem;
+      background-color: var(--lit-yellow);
+      color: #2b0808;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 0.75rem 1.8rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+
+    .back-to-events-button:hover {
+      background-color: var(--btn-hover);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-section h1 {
+        font-size: 2.8rem;
+      }
+      .hero-section p {
+        font-size: 1.2rem;
+      }
+      .section-title {
+        font-size: 2.1rem;
+      }
+      section.container {
+        padding: 3rem;
+        margin: 3rem 1.5rem;
+      }
+      .event-detail-content {
+        padding: 2.5rem 2.5rem; /* Adjust padding for detail page */
+        margin: 3rem 1.5rem;
+      }
+      .event-detail-header h1 {
+        font-size: 2.5rem;
+      }
+      .event-detail-body h3 {
+        font-size: 1.7rem;
+      }
+      .event-detail-body p,
+      .event-detail-body ul li {
+        font-size: 1.05rem;
+      }
+      .register-button {
+        padding: 0.8rem 2.5rem;
+        font-size: 1.05rem;
+      }
+      #contact {
+        padding: 3rem;
+        margin: 3rem 1.5rem;
+      }
+      .section-row {
+        gap: 2.5rem;
+      }
+      .section-row .image-col,
+      .section-row .text-col {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body {
+        padding-top: 0;
+      }
+      .navbar-brand {
+          font-size: 1.2rem;
+      }
+      .hero-section {
+          min-height: calc(100vh - 60px);
+          padding: 70px 10px 50px;
+      }
+      .hero-section h1 {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+      }
+      .hero-section p {
+        font-size: 1.05rem;
+      }
+      .btn-warning {
+        padding: 0.6rem 2rem;
+        font-size: 0.9rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+        text-align: center;
+        justify-content: center;
+      }
+      section.container {
+        padding: 2rem 1rem;
+        margin: 2rem 0.5rem;
+      }
+      .event-detail-content {
+        padding: 2rem 1rem; /* Further adjust padding for smaller screens */
+        margin: 2rem 0.5rem;
+      }
+      .event-detail-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+      .event-detail-header img {
+        margin-bottom: 1.5rem;
+        border-radius: 10px;
+      }
+      .event-detail-meta {
+        font-size: 0.85rem;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 1.5rem;
+      }
+      .event-detail-body h3 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+      }
+      .event-detail-body p,
+      .event-detail-body ul li {
+        font-size: 1rem;
+      }
+      .event-detail-body pre {
+        padding: 1rem;
+      }
+      .event-detail-body code {
+        font-size: 0.85rem;
+      }
+      .register-button {
+        padding: 0.7rem 2rem;
+        font-size: 1rem;
+        margin-top: 2.5rem;
+      }
+      .back-to-events-button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+      }
+      #contact {
+        padding: 2.5rem 1.5rem;
+      }
+      .card {
+          padding: 1.5rem;
+          margin: auto;
+      }
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+      .search-bar {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .search-bar .btn {
+        width: 100%;
+      }
+      .footer {
+          font-size: 0.9rem;
+      }
+      .footer a {
+          margin: 0 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand" href="/" aria-label="Trang chủ LIT Club">LIT CLUB</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/" style="color: var(--lit-yellow);">Trang chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="/news.html" style="color: var(--lit-yellow);">Tin tức</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/events.html" style="color: var(--lit-orange);">Sự kiện</a></li>
+        <li class="nav-item"><a class="nav-link" href="/members.html" style="color: var(--lit-yellow);">Thành viên</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about.html" style="color: var(--lit-yellow);">Về LIT</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact.html" style="color: var(--lit-yellow);">Liên hệ</a></li>
+      </ul>
+    </div>
   </div>
-</div>
+</nav>
 
-{% endblock %}
-
-{% block content %}
-<article>
-  <div>
-    {{ events.description|safe }}
+<section class="hero-section" style="min-height: 30vh; padding-top: 100px; padding-bottom: 30px;" role="banner">
+  <div class="hero-content container">
+    <h1 style="font-size: 3rem; margin-bottom: 10px;">Chi Tiết Sự Kiện</h1>
   </div>
-  <a href="{% url 'event' %}" class="btn btn-secondary mt-3">Quay lại danh sách Event</a>
-</article>
-{% endblock %}
+</section>
+
+<section id="event-article" class="event-detail-content" tabindex="0" aria-label="Nội dung sự kiện chi tiết">
+  <div class="event-detail-header">
+    <h1>Cuộc Thi Sáng Tạo Robot "Robotics Challenge 2025"</h1>
+    <img src="https://images.unsplash.com/photo-1517486801459-d8e235e12e12?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ảnh bìa Cuộc thi Sáng tạo Robot">
+    <div class="event-detail-meta">
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+          <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zm5.402 4.902A.25.25 0 0 1 9.5 5h1a.25.25 0 0 1 .173.43L11.07 6.13a.5.5 0 0 0-.022.023l-.11-.11a.25.25 0 0 1-.36-.36l.11-.11.023-.022-.647-.646z"/>
+          <path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M.5 7h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1"/>
+        </svg> Thời gian: 15/08/2025 - 17/08/2025
+      </span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+        </svg> Địa điểm: Sân vận động đa năng FPT Schools Bắc Ninh
+      </span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+          <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
+          <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3.5 8V7a.5.5 0 0 1 .5-.5"/>
+        </svg> Người tổ chức: LIT Club
+      </span>
+    </div>
+  </div>
+
+  <div class="event-detail-body">
+    <p>
+      Bạn đam mê robot và lập trình? Bạn muốn thử thách khả năng sáng tạo của mình? Cuộc thi Sáng tạo Robot "Robotics Challenge 2025" chính là sân chơi dành cho bạn!
+    </p>
+
+    <p>
+      Cuộc thi thường niên này được tổ chức bởi CLB LIT, thu hút hàng trăm học sinh từ các trường THPT trên địa bàn tỉnh Bắc Ninh. Đây là cơ hội tuyệt vời để các đội thi trình diễn robot do chính tay mình thiết kế và lập trình, thể hiện kỹ năng giải quyết vấn đề và làm việc nhóm.
+    </p>
+
+    <h3>Nội dung và Thể lệ</h3>
+    <p>
+      "Robotics Challenge 2025" sẽ tập trung vào chủ đề "Robot và Tương lai Xanh". Các đội sẽ phải xây dựng robot có khả năng thực hiện các nhiệm vụ như thu gom rác thải mô phỏng, phân loại vật liệu tái chế, hoặc tự động tưới cây trong một mô hình đô thị thông minh.
+    </p>
+    <ul>
+      <li>**Vòng loại (Ngày 15/08):** Các đội trình bày ý tưởng, thiết kế và chạy thử robot trên sa bàn nhỏ. Ban giám khảo sẽ đánh giá dựa trên tính sáng tạo, hiệu quả hoạt động và mã nguồn lập trình.</li>
+      <li>**Vòng chung kết (Ngày 17/08):** 10 đội xuất sắc nhất sẽ thi đấu trực tiếp trên sa bàn lớn với các nhiệm vụ phức tạp hơn. Điểm số sẽ được tính dựa trên thời gian hoàn thành, số lượng nhiệm vụ đã thực hiện và mức độ tự động hóa của robot.</li>
+    </ul>
+    <p>
+      Các ngôn ngữ lập trình được khuyến khích sử dụng: Python, C++, Scratch (dành cho cấp THCS), hoặc bất kỳ ngôn ngữ nào tương thích với bộ điều khiển robot.
+    </p>
+
+    <h3>Giải thưởng hấp dẫn</h3>
+    <p>Tổng giá trị giải thưởng lên đến 50 triệu đồng, bao gồm:</p>
+    <ul>
+      <li>**Giải Nhất:** Học bổng toàn phần khóa học lập trình nâng cao tại FPT Aptech, bộ kit robot tự hành và tiền mặt.</li>
+      <li>**Giải Nhì:** Học bổng 50% khóa học lập trình, bộ kit robot cơ bản và tiền mặt.</li>
+      <li>**Giải Ba:** Bộ kit robot cơ bản và tiền mặt.</li>
+      <li>**Các giải phụ:** Giải Robot Sáng tạo nhất, Giải Lập trình xuất sắc nhất, Giải Tinh thần đồng đội.</li>
+    </ul>
+
+    <h3>Cách thức đăng ký</h3>
+    <p>
+      Các bạn học sinh có thể đăng ký theo đội (tối đa 4 thành viên) hoặc đăng ký cá nhân để BTC hỗ trợ ghép đội.
+      Hạn chót đăng ký: **05/08/2025**.
+    </p>
+    <p>
+      Hãy sẵn sàng để biến những ý tưởng robot điên rồ nhất thành hiện thực và chinh phục "Robotics Challenge 2025"!
+    </p>
+
+    <a href="#" class="btn register-button" aria-label="Đăng ký tham gia sự kiện Robotics Challenge 2025">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708L8.207 4.5A.5.5 0 0 0 7.5 4v.586L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793L7.5 11.414V12a.5.5 0 0 0 .707.354z"/>
+      </svg>
+      ĐĂNG KÝ THAM GIA NGAY
+    </a>
+    <br>
+
+    <a href="/events.html" class="back-to-events-button" aria-label="Quay lại trang Sự kiện">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/>
+      </svg>
+      Quay lại Sự kiện
+    </a>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div>LIT Club © 2025 FPT Schools Bắc Ninh</div>
+    <div class="mt-2 mb-2">
+      <a href="https://www.facebook.com/your-lit-club-page" target="_blank" aria-label="Facebook CLB LIT">Facebook</a> |
+      <a href="https://www.youtube.com/your-lit-club-channel" target="_blank" aria-label="YouTube CLB LIT">YouTube</a> |
+      <a href="https://github.com/your-lit-club-repo" target="_blank" aria-label="GitHub CLB LIT">GitHub</a>
+    </div>
+    <div>
+      Địa chỉ: Khu đô thị Đại Phúc, P. Đại Phúc, TP. Bắc Ninh<br />
+      Điện thoại: 0123.567.890
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
